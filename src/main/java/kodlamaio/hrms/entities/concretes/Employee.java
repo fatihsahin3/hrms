@@ -1,22 +1,25 @@
 package kodlamaio.hrms.entities.concretes;
 
+import java.time.LocalDate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name="employees")
-public class Employee {
-	
-	@Id
-	@GeneratedValue
-	@Column(name="employee_id")
-	private int id;
-	
-	@Column(name="user_id")
-	private int userId;
+@Data
+@EqualsAndHashCode(callSuper = false)
+@PrimaryKeyJoinColumn(name = "user_id")
+@AllArgsConstructor
+@NoArgsConstructor
+public class Employee extends User{
 	
 	@Column(name="first_name")
 	private String firstName;
@@ -27,68 +30,7 @@ public class Employee {
 	@Column(name="identity_number")
 	private String identityNumber;
 	
-	@Column(name="birth_year")
-	private int birthYear;
-
-	public Employee(int id, int userId, String firstName, String lastName, String identityNumber, int birthYear) {
-		super();
-		this.id = id;
-		this.userId = userId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.identityNumber = identityNumber;
-		this.birthYear = birthYear;
-	}
+	@Column(name="date_of_birth")
+	private LocalDate dateOfBirth;
 	
-	public Employee() {
-		
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
-	}
-
-	public int getUserId() {
-		return userId;
-	}
-
-	public void setUserId(int userId) {
-		this.userId = userId;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-
-	public String getIdentityNumber() {
-		return identityNumber;
-	}
-
-	public void setIdentityNumber(String identityNumber) {
-		this.identityNumber = identityNumber;
-	}
-
-	public int getBirthYear() {
-		return birthYear;
-	}
-
-	public void setBirthYear(int birthYear) {
-		this.birthYear = birthYear;
-	}
 }
