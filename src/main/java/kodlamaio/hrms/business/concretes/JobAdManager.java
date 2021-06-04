@@ -1,12 +1,15 @@
 package kodlamaio.hrms.business.concretes;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.JobAdService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.ErrorDataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdDao;
@@ -36,31 +39,49 @@ public class JobAdManager implements JobAdService{
 	}
 
 	@Override
-	public Result add(JobAd candidate) {
+	public Result add(JobAd jobAd) {
+		jobAdDao.save(jobAd);
+		return new Result(true, "Job Ad has been saved to the system!");
+	}
+
+	@Override
+	public Result update(JobAd jobAd) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Result update(JobAd candidate) {
+	public Result delete(JobAd jobAd) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Result delete(JobAd candidate) {
-		// TODO Auto-generated method stub
-		return null;
+	public DataResult<List<JobAdDetailsDto>> getJobAdsInDetails() {
+		return new SuccessDataResult<List<JobAdDetailsDto>>(jobAdDao.getJobAdsInDetails());
 	}
 
 	@Override
-	public DataResult<List<JobAd>> getAllActiveJobAdsList() {
-		return new SuccessDataResult<List<JobAd>>(jobAdDao.getAllActiveJobAdsList());
-	}
-
-	@Override
-	public DataResult<List<JobAdDetailsDto>> getJobAdsByDetails() {
-		return new SuccessDataResult<List<JobAdDetailsDto>>(jobAdDao.getJobAdsByDetails());
+	public DataResult<List<JobAdDetailsDto>> getJobAdsInDetailsSortedByDate(int ...employerId) {
+		
+		List<JobAdDetailsDto> jobAdDetailsList;
+		
+		if(employerId == null) {
+			return new ErrorDataResult<List<JobAdDetailsDto>>("Please add an employerId into parameters!");
+		}
+		
+		if (employerId.length > 0) {
+			jobAdDetailsList = jobAdDao.getJobAdsInDetails(employerId[0]);			
+		} else {
+			jobAdDetailsList = jobAdDao.getJobAdsInDetails();
+		}
+		
+		Collections.sort(jobAdDetailsList,  (j1, j2) -> {
+			if (j1.getPublishedAt().isBefore(j2.getPublishedAt())) return 1;
+			else return -1;
+		});
+		
+		return new SuccessDataResult<List<JobAdDetailsDto>>(jobAdDetailsList);
 	}
 
 }

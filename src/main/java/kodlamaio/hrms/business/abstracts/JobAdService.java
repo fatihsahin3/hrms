@@ -10,11 +10,11 @@ import kodlamaio.hrms.entities.dtos.JobAdDetailsDto;
 public interface JobAdService {
 	
 	DataResult<List<JobAd>> getAll();
-	DataResult<List<JobAd>> getAllActiveJobAdsList();
-	DataResult<List<JobAdDetailsDto>> getJobAdsByDetails();
+	DataResult<List<JobAdDetailsDto>> getJobAdsInDetails();
+	DataResult<List<JobAdDetailsDto>> getJobAdsInDetailsSortedByDate(int ...employerId);
 	DataResult<JobAd> getById(int id);
-	Result add(JobAd candidate);
-	Result update(JobAd candidate);
-	Result delete(JobAd candidate);
+	Result add(JobAd jobAd);
+	Result update(JobAd jobAd);
+	Result delete(JobAd jobAd);
 
 }

@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.JobAdService;
 import kodlamaio.hrms.core.utilities.results.DataResult;
+import kodlamaio.hrms.core.utilities.results.Result;
 import kodlamaio.hrms.entities.concretes.JobAd;
 import kodlamaio.hrms.entities.dtos.JobAdDetailsDto;
 
@@ -29,14 +32,24 @@ public class JobAdsController {
 		return this.jobAdService.getAll();
 	}
 	
-	@GetMapping("/getAllActiveJobAdsList")
-	public DataResult<List<JobAd>> getAllActiveJobAdsList(){
-		return this.jobAdService.getAllActiveJobAdsList();
+	@GetMapping("/getJobAdsInDetails")
+	public DataResult<List<JobAdDetailsDto>> getJobAdsInDetails(){
+		return this.jobAdService.getJobAdsInDetails();
 	}
 	
-	@GetMapping("/getJobAdsByDetails")
-	public DataResult<List<JobAdDetailsDto>> getJobAdsByDetails(){
-		return this.jobAdService.getJobAdsByDetails();
+	@GetMapping("/getJobAdsInDetailsSortedByDate")
+	public DataResult<List<JobAdDetailsDto>> getJobAdsInDetailsSortedByDate(){
+		return this.jobAdService.getJobAdsInDetailsSortedByDate();
+	}
+	
+	@GetMapping("/getJobAdsInDetailsByCompanySortedByDate")
+	public DataResult<List<JobAdDetailsDto>> getJobAdsInDetailsByCompanySortedByDate(int ...employerId){
+		return this.jobAdService.getJobAdsInDetailsSortedByDate(employerId);
+	}
+	
+	@PostMapping("/add")
+	public Result add(@RequestBody JobAd jobAd){
+		return this.jobAdService.add(jobAd);
 	}
 
 }

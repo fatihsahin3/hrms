@@ -10,10 +10,10 @@ import kodlamaio.hrms.entities.dtos.JobAdDetailsDto;
 
 public interface JobAdDao extends JpaRepository<JobAd, Integer>{
 	
-	@Query("From JobAd where is_active = true")
-	List<JobAd> getAllActiveJobAdsList();
+	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdDetailsDto(e.companyName, jt.jobTitle, j.openPositionQty, j.publishedAt, j.deadline) From JobAd j Inner Join j.employer e Inner Join j.jobTitle jt where j.isActive = true")
+	List<JobAdDetailsDto> getJobAdsInDetails();
 	
-	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdDetailsDto(e.companyName, jt.jobTitle, j.openPositionQty, j.publishedAt, j.deadline) From JobAd j Inner Join j.employer e Inner Join j.jobTitle jt")
-	List<JobAdDetailsDto> getJobAdsByDetails();
+	@Query("Select new kodlamaio.hrms.entities.dtos.JobAdDetailsDto(e.companyName, jt.jobTitle, j.openPositionQty, j.publishedAt, j.deadline) From JobAd j Inner Join j.employer e Inner Join j.jobTitle jt where j.isActive = true and e.id = :employerId")
+	List<JobAdDetailsDto> getJobAdsInDetails(int employerId);
 
 }
