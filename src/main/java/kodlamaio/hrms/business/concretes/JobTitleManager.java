@@ -45,7 +45,7 @@ public class JobTitleManager implements JobTitleService {
 		}
 		
 		jobTitleDao.save(jobTitle);
-		return new SuccessResult("Job Title " + jobTitle.getJobName() + " has been successfully added!");
+		return new SuccessResult("Job Title " + jobTitle.getJobTitle() + " has been successfully added!");
 	}
 
 	@Override
@@ -62,7 +62,7 @@ public class JobTitleManager implements JobTitleService {
 	
 	private boolean checkIfJobTitleAlreadyExists(JobTitle jobTitle) {
 		
-		if(jobTitleDao.findByJobName(jobTitle.getJobName()) == null ) {
+		if(jobTitleDao.findByJobTitle(jobTitle.getJobTitle()) == null ) {
 			
 			return false;			
 		}		
