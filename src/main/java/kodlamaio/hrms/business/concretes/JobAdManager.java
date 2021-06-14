@@ -46,7 +46,6 @@ public class JobAdManager implements JobAdService{
 
 	@Override
 	public Result update(JobAd jobAd) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
@@ -60,6 +59,11 @@ public class JobAdManager implements JobAdService{
 	public DataResult<List<JobAdDetailsDto>> getJobAdsInDetails() {
 		return new SuccessDataResult<List<JobAdDetailsDto>>(jobAdDao.getJobAdsInDetails());
 	}
+	
+	@Override
+	public DataResult<List<JobAdDetailsDto>> getJobAdsInDetailsById(int id) {
+		return new SuccessDataResult<List<JobAdDetailsDto>>(jobAdDao.getJobAdsInDetailsById(id));
+	}
 
 	@Override
 	public DataResult<List<JobAdDetailsDto>> getJobAdsInDetailsSortedByDate(int ...employerId) {
@@ -71,7 +75,7 @@ public class JobAdManager implements JobAdService{
 		}
 		
 		if (employerId.length > 0) {
-			jobAdDetailsList = jobAdDao.getJobAdsInDetails(employerId[0]);			
+			jobAdDetailsList = jobAdDao.getJobAdsInDetailsByEmployerId(employerId[0]);			
 		} else {
 			jobAdDetailsList = jobAdDao.getJobAdsInDetails();
 		}
@@ -82,6 +86,12 @@ public class JobAdManager implements JobAdService{
 		});
 		
 		return new SuccessDataResult<List<JobAdDetailsDto>>(jobAdDetailsList);
+	}
+
+	@Override
+	public Result deactivateJobAd(JobAdDetailsDto jobAdDetailsDto) {
+		//JobAdDetailsDto jobAdToUpdate = jobAdDao.
+		return null;
 	}
 
 }

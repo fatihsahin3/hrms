@@ -33,8 +33,7 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public DataResult<Candidate> getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return new SuccessDataResult<Candidate>(this.candidateDao.getById(id));
 	}
 
 	@Override
@@ -59,7 +58,7 @@ public class CandidateManager implements CandidateService {
 	
 	private boolean identityNumberExists(String identityNumber) {
 		
-        if(this.candidateDao.findByIdentityNumber(identityNumber).equals(null)) {
+        if(this.candidateDao.getByIdentityNumber(identityNumber).equals(null)) {
             return false;
         }
         
@@ -68,7 +67,7 @@ public class CandidateManager implements CandidateService {
 
 	@Override
 	public DataResult<Candidate> getByIdentityNumber(String identityNumber) {
-		return new SuccessDataResult<Candidate>(this.candidateDao.findByIdentityNumber(identityNumber));
+		return new SuccessDataResult<Candidate>(this.candidateDao.getByIdentityNumber(identityNumber));
 	}
 
 }

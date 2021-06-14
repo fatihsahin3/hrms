@@ -12,10 +12,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class JobAdDetailsDto implements Dto{
 	
+	private int id;
 	private String companyName;
 	private String jobTitle;
 	private int openPositionQty;
 	private LocalDate publishedAt;
 	private LocalDate deadline;
+	private boolean isActive;
 
 }

@@ -9,6 +9,7 @@ import kodlamaio.hrms.business.abstracts.EmployerService;
 import kodlamaio.hrms.business.constraints.Messages.ResponseMessages;
 import kodlamaio.hrms.core.utilities.results.DataResult;
 import kodlamaio.hrms.core.utilities.results.Result;
+import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.EmployerDao;
 import kodlamaio.hrms.entities.concretes.Employer;
@@ -31,8 +32,7 @@ public class EmployerManager implements EmployerService {
 
 	@Override
 	public DataResult<Employer> getById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		return new SuccessDataResult<Employer>(this.employerDao.getById(id));
 	}
 
 	@Override
