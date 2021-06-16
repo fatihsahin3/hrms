@@ -95,9 +95,14 @@ public class AuthManager implements AuthService{
 		}
 		
 		if (checkIfRealPerson(Long.parseLong(candidate.getIdentityNumber()), candidate.getFirstName(),
+				candidate.getLastName(), candidate.getDateOfBirth().getYear()) == false) {
+			return new ErrorResult("Identity Number could not be verified!");
+		}
+		
+		/*if (checkIfRealPerson(Long.parseLong(candidate.getIdentityNumber()), candidate.getFirstName(),
 				candidate.getLastName(), candidate.getDateOfBirth().toInstant().atZone(ZoneId.systemDefault()).toLocalDate().getYear()) == false) {
 			return new ErrorResult("Identity Number could not be verified!");
-		}		
+		}*/
 		
 		candidateService.add(candidate);
 		String code = verificationService.sendCode();
