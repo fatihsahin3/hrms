@@ -33,6 +33,18 @@ public class Messages {
         public static String JobTitleUpdated = "JobTitle was updated!";
         public static String JobTitleDataInvalid = "JobTitle data is invalid!";
         public static String JobTitlesListed = "JobTitles were listed! ";
+        
+        public static String WorkingTypeAdded = "WorkingType was added!";
+        public static String WorkingTypeDeleted = "WorkingType was deleted!";
+        public static String WorkingTypeUpdated = "WorkingType was updated!";
+        public static String WorkingTypeDataInvalid = "WorkingType data is invalid!";
+        public static String WorkingTypesListed = "WorkingTypes were listed! ";
+        
+        public static String WorkingTimeAdded = "WorkingTime was added!";
+        public static String WorkingTimeDeleted = "WorkingTime was deleted!";
+        public static String WorkingTimeUpdated = "WorkingTime was updated!";
+        public static String WorkingTimeDataInvalid = "WorkingTime data is invalid!";
+        public static String WorkingTimesListed = "WorkingTimes were listed! ";
 		
 	}
 

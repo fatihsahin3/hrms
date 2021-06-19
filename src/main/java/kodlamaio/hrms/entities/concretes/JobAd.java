@@ -11,8 +11,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -67,5 +65,13 @@ public class JobAd implements kodlamaio.hrms.core.entities.Entity{
 	@ManyToOne
 	@JoinColumn(name = "city_id")
 	private City city;
+	
+	@ManyToOne
+	@JoinColumn(name = "working_type_id")
+	private WorkingType workingType;
+	
+	@ManyToOne
+	@JoinColumn(name = "working_time_id")
+	private WorkingType workingTime;
 
 }

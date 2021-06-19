@@ -5,6 +5,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -13,27 +14,25 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
 @Entity
-@Table(name="job_titles")
-@AllArgsConstructor
+@Table(name="working_time")
+@Data
 @NoArgsConstructor
-public class JobTitle {
+@AllArgsConstructor
+public class WorkingTime implements kodlamaio.hrms.core.entities.Entity{
 	
 	@Id
-	@GeneratedValue
-	@Column(name="id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id")
 	private int id;
 	
 	@Column(name="name")
 	private String name;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "jobTitle")
+	@OneToMany(mappedBy = "workingTime")
 	private List<JobAd> jobAds;
 
 }
